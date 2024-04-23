@@ -29,14 +29,14 @@
         die("Connection failed: " . $conn->connect_error);
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
-        $user_id = $_POST['user_id'];
+        $id = $_POST['id'];
         $sql = "DELETE FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $user_id);
+        $stmt->bind_param("i", $id);
         if ($stmt->execute()) {
-            echo "<p>User deleted successfully!</p>";
+            echo "User deleted successfully!";
         } else {
-            echo "<p>Error deleting user: " . $conn->error . "</p>";
+            echo "Error deleting user: " . $conn->error;
         }
     }
     $sql = "SELECT id, name FROM users";
@@ -45,16 +45,16 @@
         echo "<table>";
         echo "<tr><th>Name</th><th>Action</th></tr>";
         while ($row = $result->fetch_assoc()) {
-            $user_id = $row['id'];
+            $id = $row['id'];
             $name = $row['name'];
             echo "<tr><td>$name</td><td><form method='post' action=''>
-                  <input type='hidden' name='user_id' value='$user_id'>
+                  <input type='hidden' name='id' value='$id'>
                   <input type='submit' name='delete' value='Delete' onclick='return confirm(\"Are you sure you want to delete $name?\");'>
                   </form></td></tr>";
         }
         echo "</table>";
     } else {
-        echo "<p>No users found.</p>";
+        echo "No users found.";
     }
     $conn->close();
     ?>
