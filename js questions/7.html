@@ -7,15 +7,18 @@
 </head>
 <body>
     <input type="button" value="Start" onclick="EvenOrOdd()">
+    <div id="output"></div>
     <script>
         function EvenOrOdd() {
+            let outputDiv = document.getElementById('output');
             for (let i = 0; i < 15; i++) {
-                if (i % 2 == 0) {
-                    console.log(i + " is Even.")
-                }
-                else {
-                    console.log(i + " is Odd.")
-                }
+                setTimeout(() => {
+                    if (i % 2 == 0) {
+                        outputDiv.innerHTML += i + " is Even.<br>";
+                    } else {
+                        outputDiv.innerHTML += i + " is Odd.<br>";
+                    }
+                },i*1000); 
             }
         }
     </script>
