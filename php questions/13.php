@@ -47,7 +47,7 @@
                 <input type='email' id='email' name='email' value='$email'><br><br>
                 <label for='phonenumber'>Phone Number:</label>
                 <input type='text' id='phonenumber' name='phonenumber' value='$phonenumber' disabled><br><br>
-                <input type='number' name='retrievedid' value='$selected_id' style='display: none;'><br><br>";
+                <input type='hidden' name='retrievedid' value='$selected_id'><br><br>";
             } else {
                 echo "No user found with the selected ID.";
             }
@@ -55,7 +55,7 @@
         ?>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            if (!empty($_POST['retrievedid']) && !empty($_POST['name']) && !empty($_POST['email'])) {
+            if (!empty($_POST['name']) && !empty($_POST['email'])) {
                 $id = $_POST['retrievedid'];
                 $name = $_POST['name'];
                 $email = $_POST['email'];
