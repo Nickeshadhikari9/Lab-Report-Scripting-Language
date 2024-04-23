@@ -41,14 +41,13 @@
                 $email = $row['email'];
                 $phonenumber = $row['phonenumber'];
                 echo "
-                <label for='id'>ID:</label>
-                <input type='text' id='id' name='id' value='$selected_id' readonly disabled><br><br>
                 <label for='name'>Name:</label>
-                <input type='text' id='name' name='name' value='$name' required><br><br>
+                <input type='text' id='name' name='name' value='$name'><br><br>
                 <label for='email'>Email:</label>
-                <input type='email' id='email' name='email' value='$email' required><br><br>
+                <input type='email' id='email' name='email' value='$email'><br><br>
                 <label for='phonenumber'>Phone Number:</label>
-                <input type='text' id='phonenumber' name='phonenumber' value='$phonenumber' readonly disabled><br><br>";
+                <input type='text' id='phonenumber' name='phonenumber' value='$phonenumber' disabled><br><br>
+                <input type='number' name='retrievedid' value='$selected_id' style='display: none;'><br><br>";
             } else {
                 echo "No user found with the selected ID.";
             }
@@ -56,8 +55,8 @@
         ?>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            if (!empty($_POST['id']) && !empty($_POST['name']) && !empty($_POST['email'])) {
-                $id = $_POST['id'];
+            if (!empty($_POST['retrievedid']) && !empty($_POST['name']) && !empty($_POST['email'])) {
+                $id = $_POST['retrievedid'];
                 $name = $_POST['name'];
                 $email = $_POST['email'];
                 $sql = "UPDATE users SET name='$name', email='$email' WHERE id='$id'";
@@ -67,7 +66,7 @@
                     echo "Error updating user information: " . $conn->error;
                 }
             } else {
-                echo "Error: ID, name, and email are required to update user information.";
+                echo "Error: Name, and email are required to update user information.";
             }            
         }
         $conn->close();
